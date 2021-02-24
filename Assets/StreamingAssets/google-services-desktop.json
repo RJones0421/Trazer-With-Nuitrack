@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "318914799510",
+    "project_id": "unitynuitrack",
+    "storage_bucket": "unitynuitrack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318914799510:android:38373da985b003c60edfb7",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.Nuitrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "318914799510-37f5ct1c7jm248dgtto33p3gl63210jb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4daqQ8f3rpQaodh690DQhmrO2Izlg7vM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318914799510-37f5ct1c7jm248dgtto33p3gl63210jb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318914799510:android:cd9b3be315ae547f0edfb7",
+        "android_client_info": {
+          "package_name": "com.Trazer.SkeletalTracking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "318914799510-37f5ct1c7jm248dgtto33p3gl63210jb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4daqQ8f3rpQaodh690DQhmrO2Izlg7vM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318914799510-37f5ct1c7jm248dgtto33p3gl63210jb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
