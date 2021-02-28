@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "318914799510",
+    "firebase_url": "https://unitynuitrack-default-rtdb.firebaseio.com",
     "project_id": "unitynuitrack",
     "storage_bucket": "unitynuitrack.appspot.com"
   },

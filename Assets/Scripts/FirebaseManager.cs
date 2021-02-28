@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Firebase;
+using Firebase.Database;
 using Firebase.Auth;
 using UnityEngine.UI;
 using TMPro;
 
-public class AuthenticationManager : MonoBehaviour
+public class FirebaseManager : MonoBehaviour
 {
     //SceneLoader variable
     public SceneLoader scene;
@@ -33,6 +34,12 @@ public class AuthenticationManager : MonoBehaviour
     public InputField passwordRegisterVerifyField;
     public TMP_Text warningRegisterText;
     public GameObject registerMenu;
+
+    //User Data variables
+    public InputField emailField;
+    public InputField timeField;
+    public GameObject scoreElement;
+    public Transform scoreboardContent;
 
     void Awake()
     {
@@ -70,6 +77,13 @@ public class AuthenticationManager : MonoBehaviour
     {
         //Call the register coroutine passing the email, password, and username
         StartCoroutine(Register(emailRegisterField.text, passwordRegisterField.text, usernameRegisterField.text));
+    }
+
+    //Function for the sign out button
+    public void SignOutButton()
+    {
+        auth.SignOut();
+        scene.LoadLoginMenu();
     }
 
     private IEnumerator Login(string _email, string _password)
@@ -116,6 +130,7 @@ public class AuthenticationManager : MonoBehaviour
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             warningLoginText.text = "";
             confirmLoginText.text = "Logged In";
+            yield return new WaitForSeconds(2);
             scene.LoadMainMenu();
 
         }

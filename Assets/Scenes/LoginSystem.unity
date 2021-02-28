@@ -1334,7 +1334,7 @@ GameObject:
   - component: {fileID: 1301207998}
   - component: {fileID: 1301207997}
   m_Layer: 0
-  m_Name: AuthManager
+  m_Name: FirebaseManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
