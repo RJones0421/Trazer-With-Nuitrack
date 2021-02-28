@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class CollisionTester : MonoBehaviour
 {
-    [SerializeField] HitTester target;
     [SerializeField] RandomizedObjectSpawner spawner;
+
+    [SerializeField] HitTester target;
     private void OnCollisionEnter(Collision other) {
         Debug.Log("Hit");
         target.WasHit();
-        spawner.wasConeHit = true;
+        spawner.TargetHit();
     }
 
     public void SetTarget(HitTester target) {
