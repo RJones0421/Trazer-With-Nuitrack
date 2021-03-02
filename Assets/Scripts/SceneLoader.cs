@@ -7,6 +7,10 @@ using UnityEngine.UI;
 public class SceneLoader : MonoBehaviour
 {  
 
+    //Load Leaderboards
+    public void LoadLeaderboards(){
+        SceneManager.LoadScene(3);
+    }
     //Load ConeDrill
     public void LoadGameConeDrill(){
         SceneManager.LoadScene(2);
