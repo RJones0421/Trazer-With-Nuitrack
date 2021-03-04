@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    [SerializeField] ObjectSpawner spawner;
     public Text timeText;
     public Text scoreBoard;
     public float startTime = 60;
@@ -24,7 +25,7 @@ public class Timer : MonoBehaviour
     {
         if(timerActive)
         {
-            if(startTime > 0)
+            if(startTime > 0 && count < 6)
             {
                 startTime -= Time.deltaTime;
                 DisplayTime();
