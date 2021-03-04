@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Firebase;
-using Firebase.Database;
 using Firebase.Auth;
 using UnityEngine.UI;
 using TMPro;
@@ -16,7 +15,6 @@ public class FirebaseManager : MonoBehaviour
     public DependencyStatus dependencyStatus;
     public FirebaseAuth auth;
     public FirebaseUser User;
-    public DatabaseReference DBreference;
 
     //Login variables
     [Header("Login")]
@@ -35,12 +33,6 @@ public class FirebaseManager : MonoBehaviour
     public InputField passwordRegisterVerifyField;
     public TMP_Text warningRegisterText;
     public GameObject registerMenu;
-
-    //User Data variables
-    public Text emailField;
-    public InputField timeField;
-    public GameObject scoreElement;
-    public Transform scoreboardContent;
 
     void Awake()
     {
@@ -65,7 +57,6 @@ public class FirebaseManager : MonoBehaviour
         Debug.Log("Setting up Firebase Auth");
         //Set the authentication instance object
         auth = FirebaseAuth.DefaultInstance;
-        DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
     //Function for the login button
@@ -86,15 +77,6 @@ public class FirebaseManager : MonoBehaviour
     {
         auth.SignOut();
         scene.LoadLoginMenu();
-    }
-
-    //Function to save data to database
-    public void SaveDate()
-    {
-        StartCoroutine(UpdateEmailAuth(emailField.text));
-        StartCoroutine(UpdateEmailDatabase(emailField.text));
-
-        StartCoroutine(UpdateTime(float.Parse(timeField.text)));
     }
 
     private IEnumerator Login(string _email, string _password)
@@ -231,57 +213,4 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-     private IEnumerator UpdateEmailAuth(string _email)
-    {
-        //Create a user profile and set the email
-        UserProfile profile = new UserProfile { DisplayName = _email };
-
-        //Call the Firebase auth update user profile function passing the profile with the email
-        var ProfileTask = User.UpdateUserProfileAsync(profile);
-        //Wait until the task completes
-        yield return new WaitUntil(predicate: () => ProfileTask.IsCompleted);
-
-        if (ProfileTask.Exception != null)
-        {
-            Debug.LogWarning(message: $"Failed to register task with {ProfileTask.Exception}");
-        }
-        else
-        {
-            //Auth email is now updated
-        }        
-    }
-
-    private IEnumerator UpdateEmailDatabase(string _email)
-    {
-        //Set the currently logged in user email in the database
-        var DBTask = DBreference.Child("users").Child(User.UserId).Child("email").SetValueAsync(_email);
-
-        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-        if (DBTask.Exception != null)
-        {
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-        }
-        else
-        {
-            //Database email is now updated
-        }
-    }
-
-    private IEnumerator UpdateTime(float _time)
-    {
-        //Set the currently logged in user time
-        var DBTask = DBreference.Child("users").Child(User.UserId).Child("time").SetValueAsync(_time);
-
-        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-        if(DBTask.Exception != null)
-        {
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-        }
-        else
-        {
-            //Time is now updated
-        }
-    }
 }

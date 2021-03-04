@@ -2,9 +2,18 @@ using UnityEngine;
 
 public class CollisionTester : MonoBehaviour
 {
-    [SerializeField] HitTester hitTester;
+    [SerializeField] RandomizedObjectSpawner spawner;
+    [SerializeField] HitTester target;
+    [SerializeField] Timer time;
     private void OnCollisionEnter(Collision other) {
         Debug.Log("Hit");
-        hitTester.WasHit();
+        target.WasHit();
+        spawner.TargetHit();
+        time.RecordTime();
+    }
+
+    public void SetTarget(HitTester target){
+        this.target = target;
+        Debug.Log(target);
     }
 }

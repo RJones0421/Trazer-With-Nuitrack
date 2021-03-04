@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,13 +8,15 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     public Text timeText;
-    public float startTime;
-    bool timerActive = true;
+    public Text scoreBoard;
+    public float startTime = 60;
+    public int count = 1;
+    public bool timerActive;
     
     // Start is called before the first frame update
     void Start()
     {
-        timeText.text = startTime.ToString("F2");
+        timerActive = true;
     }
 
     // Update is called once per frame
@@ -20,8 +24,27 @@ public class Timer : MonoBehaviour
     {
         if(timerActive)
         {
-            startTime += Time.deltaTime;
-            timeText.text = startTime.ToString("F2");
+            if(startTime > 0)
+            {
+                startTime -= Time.deltaTime;
+                DisplayTime();
+            }
+        }
+        else
+        {
+            Debug.Log("Time is up!");
+            startTime = 0;
+            timerActive = false;
         }
     }
+
+    void DisplayTime(){
+        timeText.text = startTime.ToString("F2");
+    }
+
+    public void RecordTime(){
+        scoreBoard.text += "Cone " + count + ": " + startTime.ToString("F2") + "\n";
+        count += 1;
+    }
 }
+
