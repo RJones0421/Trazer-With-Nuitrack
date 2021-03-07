@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 26bdc0a8c743ea64dab7793c784d7ea3
-  - enabled: 1
-    path: Assets/Scenes/ConeDrill.unity
-    guid: e24464d47ee38984484f1c4c19ddcf90
-  - enabled: 1
-    path: Assets/Scenes/Leaderboard.unity
-    guid: ee845dd33e232c94abb34d978edd82c9
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
