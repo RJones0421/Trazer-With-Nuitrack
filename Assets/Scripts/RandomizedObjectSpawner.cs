@@ -38,5 +38,6 @@ public class RandomizedObjectSpawner : ObjectSpawner
             yield return new WaitForSeconds(2);
         }
         Debug.Log("Done");
+        timer.AverageTime();
     }
 }

@@ -7,7 +7,8 @@ public class Timer : MonoBehaviour
     [SerializeField] Text scoreBoard;
 
     private float timeTaken;
-    private int count = 1;
+    private float[] times;
+    private int count = 0;
     private bool timerActive;
 
     // Update is called once per frame
@@ -17,6 +18,10 @@ public class Timer : MonoBehaviour
             timeTaken += Time.deltaTime;
             DisplayTime();
         }
+    }
+
+    public void InstantiateTimes(int numTests) {
+        times = new float[numTests];
     }
 
     public void StartTime()
@@ -31,6 +36,16 @@ public class Timer : MonoBehaviour
         RecordTime();
     }
 
+    public void AverageTime() {
+        float avgTime = 0f;
+        foreach(var time in times) {
+            avgTime += time;
+        }
+        avgTime /= times.Length;
+
+        scoreBoard.text += "Average Time: " + avgTime.ToString("F2");
+    }
+
     private void DisplayTime()
     {
         timeText.text = timeTaken.ToString("F2");
@@ -38,7 +53,8 @@ public class Timer : MonoBehaviour
 
     private void RecordTime()
     {
+        times[count] = timeTaken;
+        count++;
         scoreBoard.text += "Cone " + count + ": " + timeTaken.ToString("F2") + "\n";
-        count += 1;
     }
 }

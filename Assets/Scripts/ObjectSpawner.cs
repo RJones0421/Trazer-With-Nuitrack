@@ -15,6 +15,7 @@ public abstract class ObjectSpawner : MonoBehaviour
     //make all the colliders know the target to hit
     protected void InstantiateColliders() {
         timer = FindObjectOfType<Timer>();
+        timer.InstantiateTimes(numberOfTests);
         colliders = GameObject.FindObjectsOfType<CollisionTester>();
         foreach (var collider in colliders)
         {
