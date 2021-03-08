@@ -209,7 +209,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 60.00
+  m_Text: 
 --- !u!222 &161211018
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -645,13 +645,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836484001}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.09, z: 0.42}
+  m_LocalRotation: {x: -0.00000002929291, y: 0.98768836, z: -0.1564345, w: -0.0000001849481}
+  m_LocalPosition: {x: 0, y: 2.25, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 18, y: 180.00002, z: 0}
 --- !u!1 &867685969 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7850752451572517921, guid: 3ea6d32d31fcbae4e87334060de1a2a3,
@@ -677,7 +677,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 1687385871}
-  target: {fileID: 0}
 --- !u!1 &929314303 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7850752450892030677, guid: 3ea6d32d31fcbae4e87334060de1a2a3,
@@ -769,7 +768,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 1687385871}
-  target: {fileID: 0}
 --- !u!1 &1144353959
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,7 +887,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 1687385871}
-  target: {fileID: 0}
 --- !u!1 &1215987671
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,7 +936,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 1687385871}
-  target: {fileID: 0}
 --- !u!1 &1279397649 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7850752449723612001, guid: 3ea6d32d31fcbae4e87334060de1a2a3,
@@ -965,7 +961,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 1687385871}
-  target: {fileID: 0}
 --- !u!1 &1408470354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,7 +1018,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 1687385871}
-  target: {fileID: 0}
 --- !u!1001 &1457241563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1177,12 +1171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0033d4dce348034783b9f7c7f3c46a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: 0}
   timeText: {fileID: 161211017}
   scoreBoard: {fileID: 643510250}
-  startTime: 60
-  count: 1
-  timerActive: 0
 --- !u!1 &1796244365
 GameObject:
   m_ObjectHideFlags: 0
