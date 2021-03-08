@@ -6,25 +6,14 @@ using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {  
+    public int sceneValue;
 
-    //Load Leaderboards
-    public void LoadLeaderboards(){
-        SceneManager.LoadScene(3);
+    //Load scene
+    public void LoadScene(int num){
+        SceneManager.LoadScene(num);
+        Debug.Log("Loading scene");
     }
-    //Load ConeDrill
-    public void LoadGameConeDrill(){
-        SceneManager.LoadScene(2);
-    }
-    //Load Main Menu
-    public void LoadMainMenu()
-    {
-        SceneManager.LoadScene(1);
-    }
-    //Load Login Menu
-    public void LoadLoginMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
+
     //Quit Application
     public void QuitGame(){
         Application.Quit();

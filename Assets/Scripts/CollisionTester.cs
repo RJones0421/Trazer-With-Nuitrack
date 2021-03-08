@@ -10,6 +10,7 @@ public class CollisionTester : MonoBehaviour
         target.WasHit();
         spawner.TargetHit();
         time.Add();
+        time.DisplayScore();
     }
 
     public void SetTarget(HitTester target){

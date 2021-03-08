@@ -9,20 +9,21 @@ public class Timer : MonoBehaviour, ISaveable
     public static Timer Instance;
     public Text timeText;
     public Text scoreBoard;
-    public float startTime;
-    public bool timerActive;
-    public List<string> time = new List<string>();
+    public Text score;
+    public GameObject overlay;
+    private float startTime;
+    private bool timerActive;
+    private List<string> time = new List<string>();
     
     private void Awake(){
         Instance = this;
-        startTime = 60;
+        startTime = 10;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         timerActive = true;
-        LoadJsonData(this);
     }
 
     // Update is called once per frame
@@ -41,23 +42,44 @@ public class Timer : MonoBehaviour, ISaveable
                 startTime = 0;
                 timerActive = false;
                 Save();
+                GameOver();
+                LoadJsonData(this);
             }
         }
     }
 
+    //Save run
     public void Save(){
         SaveJsonData(this);
     }
 
+    //Add time to the list
     public void Add(){
         time.Add(startTime.ToString("F2"));
         Debug.Log("Adding time!");
     }
 
+    //Display clock
     void DisplayTime(){
         timeText.text = startTime.ToString("F2");
     }
 
+    //Scoreboard
+    public void DisplayScore(){
+        scoreBoard.text += startTime.ToString("F2") + "\n";
+    }
+
+    //Display play again or view scores
+    public void GameOver(){
+        overlay.SetActive(true);
+    }
+
+    //Play Again button
+    public void Restart(){
+        scoreBoard.text = "";
+        startTime = 60;
+        timerActive = true;
+    }
     /*
     Save and Load Data
     */
@@ -92,10 +114,10 @@ public class Timer : MonoBehaviour, ISaveable
     }
 
     public void LoadFromSaveData(SaveData a_SaveData){
-
+        score.text = "";
         foreach (var time in a_SaveData.timeData)
         {
-            scoreBoard.text += time + "\n";
+            score.text += time + "\n";
         }
     }
 }
