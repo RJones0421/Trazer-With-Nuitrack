@@ -39,5 +39,12 @@ public class RandomizedObjectSpawner : ObjectSpawner
         }
         Debug.Log("Done");
         timer.AverageTime();
+        timer.Save();
+        timer.GameOver();
+    }
+
+    public void Restart(){
+        timer.Clear();
+        Start();
     }
 }

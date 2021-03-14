@@ -1,21 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {  
+    public int sceneValue;
 
-    //Load ConeDrill
-    public void LoadGameConeDrill(){
-        SceneManager.LoadScene(2);
+    //Load scene
+    public void LoadScene(int num){
+        SceneManager.LoadScene(num);
+        Debug.Log("Loading scene");
     }
-    //Load Main Menu
-    public void LoadMainMenu()
-    {
-        SceneManager.LoadScene(1);
-    }
+    
     //Quit Application
     public void QuitGame(){
         Application.Quit();
