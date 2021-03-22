@@ -16,7 +16,6 @@ public class Timer : MonoBehaviour, ISaveable
     private int count = 0;
     private bool timerActive;
     private float average = 0f;
-    private int index = 0;
 
     void Awake(){
         Instance = this;
@@ -31,6 +30,7 @@ public class Timer : MonoBehaviour, ISaveable
         }
     }
 
+    //Json Functions
     public void Save(){
         SaveJsonData(this);
     }
@@ -39,6 +39,7 @@ public class Timer : MonoBehaviour, ISaveable
         LoadJsonData(this);
     }
 
+    //Timer
     public void InstantiateTimes(int numTests) {
         times = new float[numTests];
     }
@@ -74,6 +75,7 @@ public class Timer : MonoBehaviour, ISaveable
         scoreBoard.text += "Cone " + count + ": " + timeTaken.ToString("F2") + "\n";
     }
 
+    //Restart
     public void GameOver(){
         overlay.SetActive(true);
     }
@@ -83,6 +85,7 @@ public class Timer : MonoBehaviour, ISaveable
         scoreBoard.text = "";
     }
 
+    //Json
     private static void SaveJsonData(Timer a_timer){
         SaveData sd = new SaveData();
         a_timer.PopulateSaveData(sd);
