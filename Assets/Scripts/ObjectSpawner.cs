@@ -11,11 +11,14 @@ public abstract class ObjectSpawner : MonoBehaviour
     protected CollisionTester[] colliders;
     protected bool targetHit;
     protected Timer timer;
+    protected DistanceCalculator distance;
 
     //make all the colliders know the target to hit
     protected void InstantiateColliders() {
         timer = FindObjectOfType<Timer>();
+        distance = FindObjectOfType<DistanceCalculator>();
         timer.InstantiateTimes(numberOfTests);
+        timer.InstantiateSpeeds(numberOfTests);
         colliders = GameObject.FindObjectsOfType<CollisionTester>();
         foreach (var collider in colliders)
         {

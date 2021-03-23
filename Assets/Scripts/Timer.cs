@@ -11,12 +11,20 @@ public class Timer : MonoBehaviour, ISaveable
 
     public static Timer Instance;
     public GameObject overlay;
+    
     private float timeTaken;
     private float[] times;
     private int count = 0;
     private bool timerActive;
-    private float average = 0f;
-
+    private float averageTime = 0f;
+    //Speed variables
+    public float distanceInMeters;
+    private float speed = 0f;
+    private float feetFactor = 3.28f;//Factor for conversion from m to ft
+    private float[] speeds;
+    private int index = 0;
+    private float averageSpeed = 0f;
+    
     void Awake(){
         Instance = this;
     }
@@ -44,37 +52,58 @@ public class Timer : MonoBehaviour, ISaveable
         times = new float[numTests];
     }
 
+    public void InstantiateSpeeds(int numTests){
+        speeds = new float[numTests];
+    }
+
+       private void DisplayTime()
+    {
+        timeText.text = timeTaken.ToString("F2");
+    }
+
     public void StartTime()
     {
         timerActive = true;
         timeTaken = 0;
     }
 
-    public void StopTime()
-    {
-        timerActive = false;
-        RecordTime();
-    }
-
-    public void AverageTime() {
-        foreach(var time in times) {
-            average += time;
-        }
-        average /= times.Length;
-        scoreBoard.text += "Average Time: " + average.ToString("F2");
-    }
-    private void DisplayTime()
-    {
-        timeText.text = timeTaken.ToString("F2");
-    }
-
-    private void RecordTime()
+       private void RecordTime()
     {
         times[count] = timeTaken;
         count++;
         scoreBoard.text += "Cone " + count + ": " + timeTaken.ToString("F2") + "\n";
     }
 
+    public void StopTime()
+    {
+        timerActive = false;
+        RecordTime();
+        CalculateSpeed();
+    }
+
+    public void AverageTime() {
+        foreach(var time in times) {
+            averageTime += time;
+        }
+        averageTime /= times.Length;
+        scoreBoard.text += "Average Time: " + averageTime.ToString("F2") + "\n";
+    }
+ 
+    public void CalculateSpeed(){
+        speed = (distanceInMeters * feetFactor) / timeTaken;
+        speeds[index] = speed;
+        index++;
+        scoreBoard.text += "Speed in ft/s: " + speed.ToString("F2") + "\n";
+    }
+
+    public void AverageSpeed(){
+        foreach(var s in speeds){
+            averageSpeed += s;
+        }
+        averageSpeed /= speeds.Length;
+        scoreBoard.text += "Average Speed: " + averageSpeed.ToString("F2") + "\n";
+    }
+ 
     //Restart
     public void GameOver(){
         overlay.SetActive(true);
@@ -82,6 +111,7 @@ public class Timer : MonoBehaviour, ISaveable
 
     public void Clear(){
         count = 0;
+        index = 0;
         scoreBoard.text = "";
     }
 
@@ -111,7 +141,12 @@ public class Timer : MonoBehaviour, ISaveable
         {
             a_SaveData.timeData.Add(data);
         }
-        a_SaveData.averageTimeData = average;
+        a_SaveData.averageTimeData = averageTime;
+        foreach(float data in speeds)
+        {
+            a_SaveData.speedData.Add(data);
+        }
+        a_SaveData.averageSpeedData = averageSpeed;
     }
 
     public void LoadFromSaveData(SaveData a_SaveData){
@@ -122,5 +157,6 @@ public class Timer : MonoBehaviour, ISaveable
             counter += 1;
         }
         score.text += "Average time: " + a_SaveData.averageTimeData.ToString("F2") + "\n";
+        score.text += "Average speed: " + a_SaveData.averageSpeedData.ToString("F2") + "\n";
     }
 }

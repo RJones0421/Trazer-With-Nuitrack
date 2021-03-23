@@ -22,6 +22,7 @@ public class RandomizedObjectSpawner : ObjectSpawner
             //move and activate the cone
             target.transform.position = spawner.transform.position;
             target.gameObject.SetActive(true);
+            timer.distanceInMeters = distance.CalculateDistanceXZPlane();
             timer.StartTime();
 
             //wait until the target is hit
@@ -39,6 +40,7 @@ public class RandomizedObjectSpawner : ObjectSpawner
         }
         Debug.Log("Done");
         timer.AverageTime();
+        timer.AverageSpeed();
         timer.Save();
         timer.GameOver();
     }

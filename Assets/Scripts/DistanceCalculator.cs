@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Spedometer : MonoBehaviour
+public class DistanceCalculator : MonoBehaviour
 {
     private enum Distance
     {
@@ -45,7 +45,7 @@ public class Spedometer : MonoBehaviour
         return Vector3.Distance(player.transform.position, cone.transform.position);
     }
     //2D
-    private float CalculateDistanceXZPlane(){
+    public float CalculateDistanceXZPlane(){
         Vector2 v1 = new Vector2(player.transform.position.x, player.transform.position.z);
         Vector2 v2 = new Vector2(cone.transform.position.x, cone.transform.position.z);
         return Vector2.Distance(v1,v2);
