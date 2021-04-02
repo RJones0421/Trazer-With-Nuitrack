@@ -31,4 +31,5 @@ public abstract class ObjectSpawner : MonoBehaviour
     {
         targetHit = true;
     }
+
 }

@@ -10,6 +10,9 @@ public class TPoseCalibration : MonoBehaviour
     }
 
     [SerializeField] CalibrationType calibrationType = CalibrationType.TPose;
+    [SerializeField] GameObject calibrationIcon;
+    [SerializeField] GameObject calibrationText;
+    [SerializeField] GameObject countdown;
 
     #region delegates and events
     public delegate void OnStartHandler();
@@ -76,6 +79,7 @@ public class TPoseCalibration : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Starting calibration");
         switch (calibrationType)
         {
             case CalibrationType.TPose:
@@ -143,6 +147,10 @@ public class TPoseCalibration : MonoBehaviour
                         {
                             if (onProgress != null) onProgress(timer / calibrationTime);
                             timer += Time.unscaledDeltaTime;
+                            Debug.Log("Calibration finished");
+                            calibrationIcon.SetActive(false);
+                            calibrationText.SetActive(false);
+                            countdown.SetActive(true);
                         }
                     }
                 }

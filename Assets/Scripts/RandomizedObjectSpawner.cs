@@ -6,7 +6,7 @@ public class RandomizedObjectSpawner : ObjectSpawner
     System.Random rnd = new System.Random();
 
     // start the gamemode
-    void Start()
+    public void Start()
     {
         InstantiateColliders();
         StartCoroutine(RandomSpawn());
@@ -34,6 +34,7 @@ public class RandomizedObjectSpawner : ObjectSpawner
             target.gameObject.SetActive(false);
             targetHit = false;
             timer.StopTime();
+            timer.Speed();
 
             //wait 2 seconds for the next spawn
             yield return new WaitForSeconds(2);
@@ -49,4 +50,5 @@ public class RandomizedObjectSpawner : ObjectSpawner
         timer.Clear();
         Start();
     }
+
 }

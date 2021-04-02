@@ -29,6 +29,7 @@ public class RiggedAvatarAdvanced : MonoBehaviour
 
     void OnEnable()
     {
+        Debug.Log("Calibrating");
         tPC = FindObjectOfType<TPoseCalibration>();
         tPC.onSuccess += OnSuccessCalib;
     }

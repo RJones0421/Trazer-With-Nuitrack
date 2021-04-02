@@ -14,6 +14,7 @@ public class StructureObjectSpawner : ObjectSpawner
         int count = 0;
         for (int i = 1; i <= numberOfTests; i++)
         {
+            timer.distanceInMeters = distance.CalculateDistanceXZPlane();
             timer.StartTime();
             while (count < spawners.Length) {
                 target.transform.position = spawners[count].transform.position;
@@ -29,11 +30,13 @@ public class StructureObjectSpawner : ObjectSpawner
             }
 
             timer.StopTime();
+            timer.Speed();
             count = 0;
             yield return new WaitForSeconds(2);
         }
         Debug.Log("Done");
         timer.AverageTime();
+        timer.AverageSpeed();
         timer.Save();
         timer.GameOver();
     }

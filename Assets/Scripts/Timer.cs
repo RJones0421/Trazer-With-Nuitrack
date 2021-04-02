@@ -8,6 +8,8 @@ public class Timer : MonoBehaviour, ISaveable
     [SerializeField] Text timeText;
     [SerializeField] Text scoreBoard;
     [SerializeField] Text score;
+    [SerializeField] Text speedScore;
+    [SerializeField] GameObject Avatar;
 
     public static Timer Instance;
     public GameObject overlay;
@@ -78,6 +80,9 @@ public class Timer : MonoBehaviour, ISaveable
     {
         timerActive = false;
         RecordTime();
+    }
+
+    public void Speed(){
         CalculateSpeed();
     }
 
@@ -93,7 +98,7 @@ public class Timer : MonoBehaviour, ISaveable
         speed = (distanceInMeters * feetFactor) / timeTaken;
         speeds[index] = speed;
         index++;
-        scoreBoard.text += "Speed in ft/s: " + speed.ToString("F2") + "\n";
+        speedScore.text += "Speed in ft/s: " + speed.ToString("F2") + "\n";
     }
 
     public void AverageSpeed(){
@@ -101,18 +106,20 @@ public class Timer : MonoBehaviour, ISaveable
             averageSpeed += s;
         }
         averageSpeed /= speeds.Length;
-        scoreBoard.text += "Average Speed: " + averageSpeed.ToString("F2") + "\n";
+        speedScore.text += "Average Speed: " + averageSpeed.ToString("F2") + "\n";
     }
  
     //Restart
     public void GameOver(){
         overlay.SetActive(true);
+        Avatar.SetActive(false);
     }
 
     public void Clear(){
         count = 0;
         index = 0;
         scoreBoard.text = "";
+        speedScore.text = "";
     }
 
     //Json
