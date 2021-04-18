@@ -19,6 +19,12 @@ public static class NuitrackUtils
         return new Vector3(joint.Real.X, joint.Real.Y, joint.Real.Z);
     }
 
+    //Mirrored mode
+    public static Vector3 ToVector3Flipped(this nuitrack.Joint joint)
+    {
+        return new Vector3(joint.Real.X * -1f, joint.Real.Y, joint.Real.Z);
+    }
+
     public static Quaternion ToQuaternion(this nuitrack.Joint joint)
     {
         Vector3 jointUp = new Vector3(joint.Orient.Matrix[1], joint.Orient.Matrix[4], joint.Orient.Matrix[7]);   //Y(Up)

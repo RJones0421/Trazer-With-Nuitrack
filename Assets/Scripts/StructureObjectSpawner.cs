@@ -7,6 +7,7 @@ public class StructureObjectSpawner : ObjectSpawner
     void Start()
     {
         InstantiateColliders();
+        timer.numberOfCones = numberOfTests;
         StartCoroutine(StructuredSpawn());
     }
 
@@ -15,7 +16,9 @@ public class StructureObjectSpawner : ObjectSpawner
         for (int i = 1; i <= numberOfTests; i++)
         {
             timer.distanceInMeters = distance.CalculateDistanceXZPlane();
+            timer.CalculateTotalDistanceTraveled();
             timer.StartTime();
+            timer.DisplayConesLeft();
             while (count < spawners.Length) {
                 target.transform.position = spawners[count].transform.position;
                 target.gameObject.SetActive(true);
@@ -30,12 +33,14 @@ public class StructureObjectSpawner : ObjectSpawner
             }
 
             timer.StopTime();
+            timer.UpdateNumberOfCones();
             timer.Speed();
             count = 0;
             yield return new WaitForSeconds(2);
         }
         Debug.Log("Done");
         timer.AverageTime();
+        timer.TotalTime();
         timer.AverageSpeed();
         timer.Save();
         timer.GameOver();

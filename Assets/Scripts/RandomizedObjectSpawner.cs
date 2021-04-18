@@ -8,7 +8,9 @@ public class RandomizedObjectSpawner : ObjectSpawner
     // start the gamemode
     public void Start()
     {
+        
         InstantiateColliders();
+        timer.numberOfCones = numberOfTests;
         StartCoroutine(RandomSpawn());
     }
 
@@ -23,7 +25,9 @@ public class RandomizedObjectSpawner : ObjectSpawner
             target.transform.position = spawner.transform.position;
             target.gameObject.SetActive(true);
             timer.distanceInMeters = distance.CalculateDistanceXZPlane();
+            timer.CalculateTotalDistanceTraveled();
             timer.StartTime();
+            timer.DisplayConesLeft();
 
             //wait until the target is hit
             while (!targetHit) {
@@ -34,6 +38,7 @@ public class RandomizedObjectSpawner : ObjectSpawner
             target.gameObject.SetActive(false);
             targetHit = false;
             timer.StopTime();
+            timer.UpdateNumberOfCones();
             timer.Speed();
 
             //wait 2 seconds for the next spawn
@@ -41,6 +46,7 @@ public class RandomizedObjectSpawner : ObjectSpawner
         }
         Debug.Log("Done");
         timer.AverageTime();
+        timer.TotalTime();
         timer.AverageSpeed();
         timer.Save();
         timer.GameOver();

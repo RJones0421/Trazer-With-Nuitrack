@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,18 +9,28 @@ public class Timer : MonoBehaviour, ISaveable
     [SerializeField] Text scoreBoard;
     [SerializeField] Text score;
     [SerializeField] Text speedScore;
+    [SerializeField] Text previousScore;
+
+    [SerializeField] Text conesLeft;
     [SerializeField] GameObject Avatar;
 
     public static Timer Instance;
     public GameObject overlay;
     
+    private string newLine = "\n";
     private float timeTaken;
     private float[] times;
     private int count = 0;
     private bool timerActive;
     private float averageTime = 0f;
+
+    private float totalTime = 0f;
     //Speed variables
     public float distanceInMeters;
+
+    public float totalDistanceTraveled;
+
+    public int numberOfCones;
     private float speed = 0f;
     private float feetFactor = 3.28f;//Factor for conversion from m to ft
     private float[] speeds;
@@ -60,7 +70,16 @@ public class Timer : MonoBehaviour, ISaveable
 
        private void DisplayTime()
     {
-        timeText.text = timeTaken.ToString("F2");
+        timeText.text = timeTaken.ToString("F2") + "\n";
+    }
+
+    public void DisplayConesLeft(){
+        conesLeft.text = "Cones Left: " + numberOfCones.ToString();
+    }
+
+    public void UpdateNumberOfCones()
+    {
+        numberOfCones--;
     }
 
     public void StartTime()
@@ -73,7 +92,7 @@ public class Timer : MonoBehaviour, ISaveable
     {
         times[count] = timeTaken;
         count++;
-        scoreBoard.text += "Cone " + count + ": " + timeTaken.ToString("F2") + "\n";
+        scoreBoard.text += "Cone " + count + ": " + timeTaken.ToString("F2") + "s" + "\n";
     }
 
     public void StopTime()
@@ -91,7 +110,13 @@ public class Timer : MonoBehaviour, ISaveable
             averageTime += time;
         }
         averageTime /= times.Length;
-        scoreBoard.text += "Average Time: " + averageTime.ToString("F2") + "\n";
+        scoreBoard.text += "Average Time: " + averageTime.ToString("F2") + "s" + "\n";
+    }
+
+    public void TotalTime(){
+        foreach(var time in times){
+            totalTime += time;
+        }
     }
  
     public void CalculateSpeed(){
@@ -106,20 +131,32 @@ public class Timer : MonoBehaviour, ISaveable
             averageSpeed += s;
         }
         averageSpeed /= speeds.Length;
-        speedScore.text += "Average Speed: " + averageSpeed.ToString("F2") + "\n";
+        speedScore.text += "Average Speed: " + averageSpeed.ToString("F2") + " ft/s" + "\n";
+    }
+
+    public void CalculateTotalDistanceTraveled(){
+        totalDistanceTraveled += distanceInMeters * feetFactor;
     }
  
     //Restart
     public void GameOver(){
+        timeText.text = "";
+        conesLeft.text = "";
+        speedScore.text = "";
+        scoreBoard.text = "";
+        previousScore.text = "";
+        score.text = "";
         overlay.SetActive(true);
         Avatar.SetActive(false);
     }
-
+    
     public void Clear(){
         count = 0;
         index = 0;
         scoreBoard.text = "";
         speedScore.text = "";
+        score.text = "";
+        previousScore.text = "";
     }
 
     //Json
@@ -154,16 +191,24 @@ public class Timer : MonoBehaviour, ISaveable
             a_SaveData.speedData.Add(data);
         }
         a_SaveData.averageSpeedData = averageSpeed;
+        a_SaveData.totalDistance = totalDistanceTraveled; 
+        a_SaveData.totalTimeElapsed = totalTime;
     }
 
     public void LoadFromSaveData(SaveData a_SaveData){
         int counter = 1;
+        previousScore.text += "Previous Times:" + newLine;
         foreach (var time in a_SaveData.timeData)
         {
-            score.text += "Time " + counter + ":" + time.ToString("F2") + "\n";
+            score.text += "Cone " + counter + ": time " + time.ToString("F2") + "s" + "\n";
+            previousScore.text += "Cone " + counter + ": time " + time.ToString("F2") + "s" + newLine;
             counter += 1;
         }
-        score.text += "Average time: " + a_SaveData.averageTimeData.ToString("F2") + "\n";
-        score.text += "Average speed: " + a_SaveData.averageSpeedData.ToString("F2") + "\n";
+        score.text += newLine + "Average time: " + a_SaveData.averageTimeData.ToString("F2") + " seconds" + "\n";
+        score.text += newLine + "Average speed: " + a_SaveData.averageSpeedData.ToString("F2") + " ft/s" + "\n";
+        score.text += newLine + "Total Distance Traveled: " + a_SaveData.totalDistance.ToString("F2") + " feet" + "\n";
+        score.text += newLine + "Total time: " + a_SaveData.totalTimeElapsed.ToString("F2") + " seconds" +  "\n";
+        previousScore.text += newLine + "Total time: " + a_SaveData.totalTimeElapsed.ToString("F2") + " seconds" +  "\n";
     }
+
 }

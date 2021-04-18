@@ -8,6 +8,9 @@ public class SaveData
     public float averageTimeData;
     public List<float> speedData = new List<float>();
     public float averageSpeedData;
+    public float totalDistance;
+
+    public float totalTimeElapsed;
 
     //Convert to Json String
     public string ToJson(){
