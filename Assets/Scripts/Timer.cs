@@ -14,6 +14,8 @@ public class Timer : MonoBehaviour, ISaveable
     [SerializeField] Text conesLeft;
     [SerializeField] GameObject Avatar;
 
+    [SerializeField] GameObject scripts;
+
     public static Timer Instance;
     public GameObject overlay;
     
@@ -209,6 +211,10 @@ public class Timer : MonoBehaviour, ISaveable
         score.text += newLine + "Total Distance Traveled: " + a_SaveData.totalDistance.ToString("F2") + " feet" + "\n";
         score.text += newLine + "Total time: " + a_SaveData.totalTimeElapsed.ToString("F2") + " seconds" +  "\n";
         previousScore.text += newLine + "Total time: " + a_SaveData.totalTimeElapsed.ToString("F2") + " seconds" +  "\n";
+    }
+
+    public void OnExit(){
+        Destroy(scripts);
     }
 
 }
